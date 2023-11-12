@@ -11,14 +11,14 @@ function apt_install {
     exit 1
   fi
 }
-function pip_install {
-  sudo pip3 install --upgrade "$@"
-  if [ $? -ne 0 ]; then
-    echo "could not install $p - abort"
-    rm ${PROGRESS_FILE}
-    exit 1
-  fi
-}
+#function pip_install {
+#  sudo pip3 install --upgrade "$@"
+#  if [ $? -ne 0 ]; then
+#    echo "could not install $p - abort"
+#    rm ${PROGRESS_FILE}
+#    exit 1
+#  fi
+#}
 #echo "Prérequis python3"
 echo 10 > ${PROGRESS_FILE}
 #apt_install python3
@@ -30,20 +30,18 @@ echo 20 > ${PROGRESS_FILE}
 echo "Installation de la librairie ftdi pour modem 2 compteurs"
 #sudo apt-get -y install python3-ftdi
 sudo apt-get -y install python3-ftdi1
-#pip_install pyftdi
-pip_install pylibftdi
+#sudo apt-get -y install python3-pyftdi
+sudo apt-get -y install python3-ftdi
 echo 30 > ${PROGRESS_FILE}
 #pip_install python-ftdi1
 echo 40 > ${PROGRESS_FILE}
 echo "Installation de la librairie serial"
-#pip_install serial
-sudo pip uninstall -y serial
-pip_install six
-#apt_install python-serial
-pip_install pyserial
-pip_install setuptools
-pip_install requests
-pip_install pyudev
+#sudo apt-get -y install python3-serial
+sudo apt-get -y install python3-serial
+sudo apt-get -y install python3-six
+sudo apt-get -y install python3-setuptools
+sudo apt-get -y install python3-requests
+sudo apt-get -y install python3-pyudev
 echo 50 > ${PROGRESS_FILE}
 echo "Mise à jour de cmdline ou inittab suivant système"
 if [ -e /dev/ttyAMA0 ];  then
